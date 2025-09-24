@@ -1,0 +1,16 @@
+# .streamlit/config.toml
+[theme]
+# Primary accent color (used for buttons, links, etc.)
+primaryColor = "#FFD100" # UI_BRAND_YELLOW
+
+# Background color of the main content area
+backgroundColor = "#FFFFFF" # UI_NEUTRAL_WHITE
+
+# Background color of the sidebar and secondary elements
+secondaryBackgroundColor = "#F5F5F5" # UI_GREY_LIGHTEST
+
+# Color of the text in the app
+textColor = "#2C2C2C" # UI_GREY_DARKER
+
+# Font family for the app
+font = "sans serif" # Generic web font

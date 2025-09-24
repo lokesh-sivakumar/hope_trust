@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hope Trust</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/LOGO.png" alt="Hope Trust">
+                <span>Hope Trust</span>
+            </div>
+            <nav aria-label="Main Navigation">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#what-we-do">Our Impact</a></li>
+                    <li><a href="#mission-vision">Mission & Vision</a></li>
+                    <li><a href="#events" class="active">Events</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button id="dark-mode-toggle" aria-label="Toggle dark mode" title="Toggle dark mode" tabindex="0">
+                <span id="dark-mode-icon" aria-hidden="true">🌙</span>
+            </button>
+        </div>
+    </header>
+    <section id="home" class="hero" style="background-image: url('images/ht_01.jpg');">
+        <div class="container"></div>
+    </section>
+    <section class="quote-section">
+        <div class="container">
+            <blockquote><span class="quote-mark">&ldquo;</span>We plant a 'seed of achievement' in their heart and mind, you (school) nurture them and help them to deepen their roots and spread their branches in the society&quot;</blockquote>
+            <cite>- Sathish Kumar. S, President, HOPE TRUST</cite>
+        </div>
+    </section>
+    <section id="what-we-do" class="about">
+        <div class="container">
+            <h2>Our Impact</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="images/ht_02.jpg" alt="Hope Trust's Impact">
+                </div>
+                <div class="about-text">
+                    <p>Hope Trust empowers communities through transformative programs in education, healthcare, women's development, youth empowerment, and human rights—embracing all without discrimination.</p>
+                    <p>We create sustainable solutions that uplift communities, providing access to quality education, healthcare, and opportunities that break cycles of poverty and inequality.</p>
+                    <p>With special focus on women and children, we implement innovative programs that nurture potential, ensure equal opportunities, and create pathways to brighter futures.</p>
+                    <p>Our health initiatives bring vital services directly to communities through mobile clinics and awareness programs, improving wellbeing and saving lives.</p>
+                    <p>Through values of compassion and unity, we're building a movement of change—one that creates lasting impact and transforms lives for generations to come.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="mission-vision" class="mission-vision">
+        <div class="container mission-vision-flex">
+            <div class="mission">
+                <h3>Our Mission</h3>
+                <p>To inspire and nurture young minds with values that create positive change and build thriving communities.</p>
+            </div>
+            <div class="divider"></div>
+            <div class="vision">
+                <h3>Our Vision</h3>
+                <p>A world where every individual has equal opportunities to learn, grow, and thrive with dignity and purpose.</p>
+            </div>
+        </div>
+    </section>
+    <section id="events" class="events">
+        <div class="container">
+            <h2>Our Events</h2>
+            <div class="event-search-bar">
+                                <div id="custom-date-filter" class="custom-dropdown">
+                    <button type="button" class="custom-dropdown-selected" id="custom-date-selected">All Dates <span class="custom-dropdown-arrow">&#9662;</span></button>
+                    <ul class="custom-dropdown-list" id="custom-date-list" style="display:none;"></ul>
+                </div>
+                <div id="custom-year-filter" class="custom-dropdown">
+                    <button type="button" class="custom-dropdown-selected" id="custom-year-selected">All Years <span class="custom-dropdown-arrow">&#9662;</span></button>
+                    <ul class="custom-dropdown-list" id="custom-year-list" style="display:none;"></ul>
+                </div>
+            </div>
+            <div class="timeline" id="timeline">
+                <!-- Events will be dynamically rendered here -->
+            </div>
+        </div>
+    </section>
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2>Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="images/ht_03.jpg" alt="Gallery Image 1"></div>
+                <div class="gallery-item"><img src="images/ht_05.jpg" alt="Gallery Image 2"></div>
+                <div class="gallery-item"><img src="images/ht_04.jpg" alt="Gallery Image 3"></div>
+            </div>
+        </div>
+    </section>
+    <!-- Minimal Loader -->
+    <div id="loader" role="status" aria-live="polite" aria-label="Loading">
+        <div class="loader-spinner"></div>
+    </div>
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h4><img src="images/LOGO.png" alt="Hope Trust Logo" class="footer-logo"> About Hope Trust</h4>
+                    <p>We are a charitable and educational trust dedicated to helping underprivileged individuals and communities.</p>
+                </div>
+                <div class="footer-bank-details">
+                    <h4>Bank Details</h4>
+                    <p><strong>Name:</strong> Hope Trust</p>
+                    <p><strong>Bank Name:</strong> Punjab National Bank</p>
+                    <p><strong>Account Number:</strong> 17812612000155</p>
+                    <p><strong>IFSC Code:</strong> PUNB0178110</p>
+                </div>
+                <div>
+                    <div class="footer-contact">
+                        <h4>Contact Us</h4>
+                        <p><i class="fas fa-phone"></i> +91 7397271881</p>
+                        <p><i class="fas fa-envelope"></i> hopetrust0217@gmail.com</p>
+                    </div>
+                    <div class="footer-social">
+                        <h4>Follow Us</h4>
+                        <div class="footer-social-icons">
+                            <a href="https://www.facebook.com/hopetrustTWC/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://x.com/HopeTrust_TwC/" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/hopetrust_twc/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/channel/UC6OXLeklKBNab0nBq6vTxMw" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <a href="https://www.linkedin.com/in/hopetrust-twc/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2025 Hope Trust. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Social Media Floating Links and Back to Top Button -->
+    <div class="social-media-bottom">
+        <a href="https://www.facebook.com/hopetrustTWC/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://x.com/HopeTrust_TwC/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/hopetrust_twc/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UC6OXLeklKBNab0nBq6vTxMw" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.linkedin.com/in/hopetrust-twc/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <a href="#home" class="back-to-top" title="Back to Top"><i class="fas fa-arrow-up"></i></a>
+    <script>
+        // Show/hide back-to-top button on scroll
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Dynamic active nav underline
+        const navLinks = document.querySelectorAll('header nav ul li a');
+        const sections = [
+            {id: 'home', link: null},
+            {id: 'what-we-do', link: null},
+            {id: 'mission-vision', link: null},
+            {id: 'events', link: null},
+            {id: 'contact', link: null}
+        ];
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const id = href.replace('#', '');
+                const section = sections.find(s => s.id === id);
+                if (section) section.link = link;
+            }
+        });
+
+        function setActiveNav() {
+            let scrollPos = window.scrollY || window.pageYOffset;
+            let offset = 120; // header height buffer
+            let current = sections[0];
+            for (let i = 0; i < sections.length; i++) {
+                const sec = document.getElementById(sections[i].id);
+                if (sec && sec.offsetTop - offset <= scrollPos) {
+                    current = sections[i];
+                }
+            }
+            // If at the bottom of the page, set Contact as active
+            if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 2)) {
+                const contactSection = sections.find(s => s.id === 'contact');
+                if (contactSection) current = contactSection;
+            }
+            navLinks.forEach(link => link.classList.remove('active'));
+            if (current.link) current.link.classList.add('active');
+        }
+
+        window.addEventListener('scroll', setActiveNav);
+        window.addEventListener('DOMContentLoaded', setActiveNav);
+
+        // Dynamically render events from events.json with search and year filter
+        let allEvents = [];
+        let allYears = [];
+        let allDates = [];
+        let selectedYear = "";
+        let selectedDate = "";
+        
+        async function renderEvents(year = "", date = "") {
+            const timeline = document.getElementById('timeline');
+            const loader = document.getElementById('loader');
+            if (!timeline) return;
+            if (loader) loader.classList.add('active');
+
+            try {
+                if (allEvents.length === 0) {
+                    const res = await fetch('events.json');
+                    if (!res.ok) {
+                        throw new Error(`Failed to fetch events: ${res.status} ${res.statusText}`);
+                    }
+                    allEvents = await res.json();
+                    // Extract unique years from event dates (only if date exists)
+                    allYears = Array.from(new Set(allEvents
+                        .filter(ev => ev.date)
+                        .map(ev => (ev.date.match(/\d{4}/) || [""])[0])
+                    )).filter(y => y).sort((a, b) => b - a);
+                    // Extract unique dates (full date string)
+                    allDates = Array.from(new Set(allEvents
+                        .filter(ev => ev.date)
+                        .map(ev => ev.date)
+                    )).filter(d => d).sort((a, b) => {
+                        // Convert human-readable dates to sortable format (YYYY-MM-DD)
+                        const parseDate = (dateStr) => {
+                            const parts = dateStr.split(' ');
+                            if (parts.length < 3) return new Date(0);
+                            const day = parts[0].padStart(2, '0');
+                            const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                                          'July', 'August', 'September', 'October', 'November', 'December'];
+                            const month = months.indexOf(parts[1]);
+                            const year = parts[2];
+                            return new Date(year, month, day);
+                        };
+                        return parseDate(b) - parseDate(a);
+                    });
+                    // Populate custom year dropdown
+                    const yearList = document.getElementById('custom-year-list');
+                    if (yearList) {
+                        yearList.innerHTML = '';
+                        const allYearsLi = document.createElement('li');
+                        allYearsLi.textContent = 'All Years';
+                        allYearsLi.setAttribute('data-value', '');
+                        allYearsLi.className = 'custom-dropdown-item';
+                        yearList.appendChild(allYearsLi);
+                        allYears.forEach(y => {
+                            const li = document.createElement('li');
+                            li.textContent = y;
+                            li.setAttribute('data-value', y);
+                            li.className = 'custom-dropdown-item';
+                            yearList.appendChild(li);
+                        });
+                    }
+                    // Populate custom date dropdown
+                    const dateList = document.getElementById('custom-date-list');
+                    if (dateList) {
+                        dateList.innerHTML = '';
+                        const allDatesLi = document.createElement('li');
+                        allDatesLi.textContent = 'All Dates';
+                        allDatesLi.setAttribute('data-value', '');
+                        allDatesLi.className = 'custom-dropdown-item';
+                        dateList.appendChild(allDatesLi);
+                        allDates.forEach(d => {
+                            const li = document.createElement('li');
+                            li.textContent = d;
+                            li.setAttribute('data-value', d);
+                            li.className = 'custom-dropdown-item';
+                            dateList.appendChild(li);
+                        });
+                    }
+                }
+                const filtered = allEvents.filter(event => {
+                    const eventYear = event.date ? (event.date.match(/\d{4}/) || [""])[0] : "";
+                    const matchesYear = !year || eventYear === year;
+                    const matchesDate = !date || event.date === date;
+                    
+                    // Include events without dates when no specific filter is selected
+                    if (!event.date) {
+                        return !year && !date;
+                    }
+                    
+                    return matchesYear && matchesDate;
+                });
+                timeline.innerHTML = filtered.length ? filtered.map((event, i) => {
+                    const dateHTML = event.date ? `<div class="event-date-header">${event.date}</div>` : "";
+                    const volunteersHTML = event.volunteers ? `<div class="event-volunteers-header">${event.volunteers}</div>` : "";
+                    const rightHeader = (dateHTML || volunteersHTML) ? `<div class="event-header-meta">${dateHTML}${volunteersHTML}</div>` : "";
+                    return `
+                    <div class="event">
+                        <div class="event-image">
+                            <img src="${event.image}" alt="${event.title}">
+                        </div>
+                        <div class="event-content">
+                            <div class="event-header-row-v2">
+                                <h3 class="event-title-v2">${event.title}
+                                    <span class="event-title-underline">
+                                        <span class="event-title-line"></span>
+                                        <span class="event-title-dot"></span>
+                                        <span class="event-title-dot"></span>
+                                        <span class="event-title-dot"></span>
+                                    </span>
+                                </h3>
+                                ${rightHeader}
+                            </div>
+                            <p>${event.description}</p>
+                        </div>
+                        <span class="timeline-point"></span>
+                    </div>
+                    `;
+                }).join('') : '<p style="color:#888;text-align:center;">No events found.</p>';
+            } catch (e) {
+                console.error("Error loading events:", e); // Log the error for debugging
+                timeline.innerHTML = '<p style="color:#c00;text-align:center;">Could not load events.</p>';
+            } finally {
+                if (loader) loader.classList.remove('active');
+            }
+        }
+        
+// Dark mode toggle logic
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+const darkModeIcon = document.getElementById('dark-mode-icon');
+function setDarkMode(enabled) {
+    if (enabled) {
+        document.body.classList.add('dark-mode');
+        if (darkModeIcon) darkModeIcon.textContent = '☀️';
+        localStorage.setItem('darkMode', '1');
+    } else {
+        document.body.classList.remove('dark-mode');
+        if (darkModeIcon) darkModeIcon.textContent = '🌙';
+        localStorage.setItem('darkMode', '0');
+    }
+}
+if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('dark-mode');
+        setDarkMode(isDark);
+    });
+    // Keyboard accessibility
+    darkModeToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            darkModeToggle.click();
+        }
+    });
+}
+// On load, set dark mode from localStorage
+window.addEventListener('DOMContentLoaded', () => {
+    const darkPref = localStorage.getItem('darkMode');
+    setDarkMode(darkPref === '1');
+});
+        
+        // Custom dropdown logic for year
+        function setupCustomYearDropdown() {
+            const dropdown = document.getElementById('custom-year-filter');
+            const selected = document.getElementById('custom-year-selected');
+            const list = document.getElementById('custom-year-list');
+            if (!dropdown || !selected || !list) return;
+
+            // Toggle dropdown
+            selected.addEventListener('click', function(e) {
+                e.stopPropagation();
+                list.style.display = list.style.display === 'block' ? 'none' : 'block';
+                dropdown.classList.toggle('open');
+            });
+
+            // Select year
+            list.addEventListener('click', function(e) {
+                if (e.target && e.target.matches('li.custom-dropdown-item')) {
+                    const value = e.target.getAttribute('data-value');
+                    selected.textContent = value ? value : 'All Years';
+                    selected.innerHTML += ' <span class="custom-dropdown-arrow">&#9662;</span>';
+                    selectedYear = value;
+                    list.style.display = 'none';
+                    dropdown.classList.remove('open');
+                    renderEvents(selectedYear, selectedDate);
+                }
+            });
+
+            // Close dropdown on outside click
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    list.style.display = 'none';
+                    dropdown.classList.remove('open');
+                }
+            });
+        }
+
+        // Custom dropdown logic for date
+        function setupCustomDateDropdown() {
+            const dropdown = document.getElementById('custom-date-filter');
+            const selected = document.getElementById('custom-date-selected');
+            const list = document.getElementById('custom-date-list');
+            if (!dropdown || !selected || !list) return;
+
+            // Toggle dropdown
+            selected.addEventListener('click', function(e) {
+                e.stopPropagation();
+                list.style.display = list.style.display === 'block' ? 'none' : 'block';
+                dropdown.classList.toggle('open');
+            });
+
+            // Select date
+            list.addEventListener('click', function(e) {
+                if (e.target && e.target.matches('li.custom-dropdown-item')) {
+                    const value = e.target.getAttribute('data-value');
+                    selected.textContent = value ? value : 'All Dates';
+                    selected.innerHTML += ' <span class="custom-dropdown-arrow">&#9662;</span>';
+                    selectedDate = value;
+                    list.style.display = 'none';
+                    dropdown.classList.remove('open');
+                    renderEvents(selectedYear, selectedDate);
+                }
+            });
+
+            // Close dropdown on outside click
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    list.style.display = 'none';
+                    dropdown.classList.remove('open');
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderEvents();
+            setupCustomYearDropdown();
+            setupCustomDateDropdown();
+        });
+    </script>
+</body>
+</html>

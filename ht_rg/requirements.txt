@@ -1,6 +1,0 @@
-streamlit
-pandas
-python-dateutil
-supabase
-reportlab
-num2words

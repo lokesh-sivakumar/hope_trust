@@ -12,4 +12,7 @@ __pycache__/
 
 # IDE folders
 .idea/
-.vscode/ 
+.vscode/
+
+# Streamlit
+.streamlit/

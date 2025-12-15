@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hope Trust</title>
+    <link rel="icon" href="images/LOGO.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -22,11 +23,9 @@
                     <li><a href="#mission-vision">Mission & Vision</a></li>
                     <li><a href="#events" class="active">Events</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li><a href="http://localhost:8501" target="_blank">Admin Login</a></li>
                 </ul>
             </nav>
-            <button id="dark-mode-toggle" aria-label="Toggle dark mode" title="Toggle dark mode" tabindex="0">
-                <span id="dark-mode-icon" aria-hidden="true">🌙</span>
-            </button>
         </div>
     </header>
     <section id="home" class="hero" style="background-image: url('images/ht_01.jpg');">
@@ -72,13 +71,13 @@
         <div class="container">
             <h2>Our Events</h2>
             <div class="event-search-bar">
-                                <div id="custom-date-filter" class="custom-dropdown">
-                    <button type="button" class="custom-dropdown-selected" id="custom-date-selected">All Dates <span class="custom-dropdown-arrow">&#9662;</span></button>
-                    <ul class="custom-dropdown-list" id="custom-date-list" style="display:none;"></ul>
-                </div>
-                <div id="custom-year-filter" class="custom-dropdown">
-                    <button type="button" class="custom-dropdown-selected" id="custom-year-selected">All Years <span class="custom-dropdown-arrow">&#9662;</span></button>
-                    <ul class="custom-dropdown-list" id="custom-year-list" style="display:none;"></ul>
+                <div class="custom-dropdown" id="custom-year-filter">
+                    <div class="custom-dropdown-selected" id="custom-year-selected">
+                        All Years <span class="custom-dropdown-arrow">&#9662;</span>
+                    </div>
+                    <ul class="custom-dropdown-list" id="custom-year-list">
+                        <!-- Year options will be populated by script -->
+                    </ul>
                 </div>
             </div>
             <div class="timeline" id="timeline">
@@ -195,181 +194,65 @@
         }
 
         window.addEventListener('scroll', setActiveNav);
-        window.addEventListener('DOMContentLoaded', setActiveNav);
 
-        // Dynamically render events from events.json with search and year filter
         let allEvents = [];
-        let allYears = [];
-        let allDates = [];
         let selectedYear = "";
-        let selectedDate = "";
-        
-        async function renderEvents(year = "", date = "") {
-            const timeline = document.getElementById('timeline');
-            const loader = document.getElementById('loader');
-            if (!timeline) return;
-            if (loader) loader.classList.add('active');
 
-            try {
-                if (allEvents.length === 0) {
-                    const res = await fetch('events.json');
-                    if (!res.ok) {
-                        throw new Error(`Failed to fetch events: ${res.status} ${res.statusText}`);
-                    }
-                    allEvents = await res.json();
-                    // Extract unique years from event dates (only if date exists)
-                    allYears = Array.from(new Set(allEvents
-                        .filter(ev => ev.date)
-                        .map(ev => (ev.date.match(/\d{4}/) || [""])[0])
-                    )).filter(y => y).sort((a, b) => b - a);
-                    // Extract unique dates (full date string)
-                    allDates = Array.from(new Set(allEvents
-                        .filter(ev => ev.date)
-                        .map(ev => ev.date)
-                    )).filter(d => d).sort((a, b) => {
-                        // Convert human-readable dates to sortable format (YYYY-MM-DD)
-                        const parseDate = (dateStr) => {
-                            const parts = dateStr.split(' ');
-                            if (parts.length < 3) return new Date(0);
-                            const day = parts[0].padStart(2, '0');
-                            const months = ['January', 'February', 'March', 'April', 'May', 'June', 
-                                          'July', 'August', 'September', 'October', 'November', 'December'];
-                            const month = months.indexOf(parts[1]);
-                            const year = parts[2];
-                            return new Date(year, month, day);
-                        };
-                        return parseDate(b) - parseDate(a);
-                    });
-                    // Populate custom year dropdown
-                    const yearList = document.getElementById('custom-year-list');
-                    if (yearList) {
-                        yearList.innerHTML = '';
-                        const allYearsLi = document.createElement('li');
-                        allYearsLi.textContent = 'All Years';
-                        allYearsLi.setAttribute('data-value', '');
-                        allYearsLi.className = 'custom-dropdown-item';
-                        yearList.appendChild(allYearsLi);
-                        allYears.forEach(y => {
-                            const li = document.createElement('li');
-                            li.textContent = y;
-                            li.setAttribute('data-value', y);
-                            li.className = 'custom-dropdown-item';
-                            yearList.appendChild(li);
-                        });
-                    }
-                    // Populate custom date dropdown
-                    const dateList = document.getElementById('custom-date-list');
-                    if (dateList) {
-                        dateList.innerHTML = '';
-                        const allDatesLi = document.createElement('li');
-                        allDatesLi.textContent = 'All Dates';
-                        allDatesLi.setAttribute('data-value', '');
-                        allDatesLi.className = 'custom-dropdown-item';
-                        dateList.appendChild(allDatesLi);
-                        allDates.forEach(d => {
-                            const li = document.createElement('li');
-                            li.textContent = d;
-                            li.setAttribute('data-value', d);
-                            li.className = 'custom-dropdown-item';
-                            dateList.appendChild(li);
-                        });
-                    }
+        // Renders events for a specific year from the global allEvents array
+        function renderEvents(year) {
+            const timeline = document.getElementById('timeline');
+            if (!timeline) return;
+
+            const filtered = allEvents.filter(event => {
+                const eventYear = event.date ? (event.date.match(/\d{4}/) || [""])[0] : "";
+                if (year === "") { // "All Years"
+                    return true;
                 }
-                const filtered = allEvents.filter(event => {
-                    const eventYear = event.date ? (event.date.match(/\d{4}/) || [""])[0] : "";
-                    const matchesYear = !year || eventYear === year;
-                    const matchesDate = !date || event.date === date;
-                    
-                    // Include events without dates when no specific filter is selected
-                    if (!event.date) {
-                        return !year && !date;
-                    }
-                    
-                    return matchesYear && matchesDate;
-                });
-                timeline.innerHTML = filtered.length ? filtered.map((event, i) => {
-                    const dateHTML = event.date ? `<div class="event-date-header">${event.date}</div>` : "";
-                    const volunteersHTML = event.volunteers ? `<div class="event-volunteers-header">${event.volunteers}</div>` : "";
-                    const rightHeader = (dateHTML || volunteersHTML) ? `<div class="event-header-meta">${dateHTML}${volunteersHTML}</div>` : "";
-                    return `
-                    <div class="event">
-                        <div class="event-image">
-                            <img src="${event.image}" alt="${event.title}">
-                        </div>
-                        <div class="event-content">
-                            <div class="event-header-row-v2">
-                                <h3 class="event-title-v2">${event.title}
-                                    <span class="event-title-underline">
-                                        <span class="event-title-line"></span>
-                                        <span class="event-title-dot"></span>
-                                        <span class="event-title-dot"></span>
-                                        <span class="event-title-dot"></span>
-                                    </span>
-                                </h3>
-                                ${rightHeader}
-                            </div>
-                            <p>${event.description}</p>
-                        </div>
-                        <span class="timeline-point"></span>
+                return eventYear === year;
+            });
+
+            timeline.innerHTML = filtered.length ? filtered.map((event, i) => {
+                const dateHTML = event.date ? `<div class="event-date-header">${event.date}</div>` : "";
+                const volunteersHTML = event.volunteers ? `<div class="event-volunteers-header">${event.volunteers}</div>` : "";
+                const rightHeader = (dateHTML || volunteersHTML) ? `<div class="event-header-meta">${dateHTML}${volunteersHTML}</div>` : "";
+                return `
+                <div class="event">
+                    <div class="event-image">
+                        <img src="${event.image}" alt="${event.title}">
                     </div>
-                    `;
-                }).join('') : '<p style="color:#888;text-align:center;">No events found.</p>';
-            } catch (e) {
-                console.error("Error loading events:", e); // Log the error for debugging
-                timeline.innerHTML = '<p style="color:#c00;text-align:center;">Could not load events.</p>';
-            } finally {
-                if (loader) loader.classList.remove('active');
-            }
+                    <div class="event-content">
+                        <div class="event-header-row-v2">
+                            <h3 class="event-title-v2">${event.title}
+                                <span class="event-title-underline">
+                                    <span class="event-title-line"></span>
+                                    <span class="event-title-dot"></span>
+                                    <span class="event-title-dot"></span>
+                                    <span class="event-title-dot"></span>
+                                </span>
+                            </h3>
+                            ${rightHeader}
+                        </div>
+                        <p>${event.description}</p>
+                    </div>
+                    <span class="timeline-point"></span>
+                </div>
+                `;
+            }).join('') : '<p style="color:#888;text-align:center;">No events found for the selected year.</p>';
         }
-        
-// Dark mode toggle logic
-const darkModeToggle = document.getElementById('dark-mode-toggle');
-const darkModeIcon = document.getElementById('dark-mode-icon');
-function setDarkMode(enabled) {
-    if (enabled) {
-        document.body.classList.add('dark-mode');
-        if (darkModeIcon) darkModeIcon.textContent = '☀️';
-        localStorage.setItem('darkMode', '1');
-    } else {
-        document.body.classList.remove('dark-mode');
-        if (darkModeIcon) darkModeIcon.textContent = '🌙';
-        localStorage.setItem('darkMode', '0');
-    }
-}
-if (darkModeToggle) {
-    darkModeToggle.addEventListener('click', () => {
-        const isDark = document.body.classList.toggle('dark-mode');
-        setDarkMode(isDark);
-    });
-    // Keyboard accessibility
-    darkModeToggle.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            darkModeToggle.click();
-        }
-    });
-}
-// On load, set dark mode from localStorage
-window.addEventListener('DOMContentLoaded', () => {
-    const darkPref = localStorage.getItem('darkMode');
-    setDarkMode(darkPref === '1');
-});
-        
-        // Custom dropdown logic for year
+
+        // Sets up the dropdown interaction
         function setupCustomYearDropdown() {
             const dropdown = document.getElementById('custom-year-filter');
             const selected = document.getElementById('custom-year-selected');
             const list = document.getElementById('custom-year-list');
             if (!dropdown || !selected || !list) return;
 
-            // Toggle dropdown
             selected.addEventListener('click', function(e) {
                 e.stopPropagation();
                 list.style.display = list.style.display === 'block' ? 'none' : 'block';
                 dropdown.classList.toggle('open');
             });
 
-            // Select year
             list.addEventListener('click', function(e) {
                 if (e.target && e.target.matches('li.custom-dropdown-item')) {
                     const value = e.target.getAttribute('data-value');
@@ -378,11 +261,10 @@ window.addEventListener('DOMContentLoaded', () => {
                     selectedYear = value;
                     list.style.display = 'none';
                     dropdown.classList.remove('open');
-                    renderEvents(selectedYear, selectedDate);
+                    renderEvents(selectedYear); // Re-render with the new year
                 }
             });
 
-            // Close dropdown on outside click
             document.addEventListener('click', function(e) {
                 if (!dropdown.contains(e.target)) {
                     list.style.display = 'none';
@@ -391,47 +273,72 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Custom dropdown logic for date
-        function setupCustomDateDropdown() {
-            const dropdown = document.getElementById('custom-date-filter');
-            const selected = document.getElementById('custom-date-selected');
-            const list = document.getElementById('custom-date-list');
-            if (!dropdown || !selected || !list) return;
+        // Main function to fetch data and initialize the events section
+        async function initializeEvents() {
+            const loader = document.getElementById('loader');
+            const timeline = document.getElementById('timeline');
+            if (loader) loader.classList.add('active');
 
-            // Toggle dropdown
-            selected.addEventListener('click', function(e) {
-                e.stopPropagation();
-                list.style.display = list.style.display === 'block' ? 'none' : 'block';
-                dropdown.classList.toggle('open');
-            });
+            try {
+                const res = await fetch('events.json');
+                if (!res.ok) {
+                    throw new Error(`Failed to fetch events: ${res.status} ${res.statusText}`);
+                }
+                allEvents = await res.json();
 
-            // Select date
-            list.addEventListener('click', function(e) {
-                if (e.target && e.target.matches('li.custom-dropdown-item')) {
-                    const value = e.target.getAttribute('data-value');
-                    selected.textContent = value ? value : 'All Dates';
+                // Extract unique years from event dates
+                const allYears = Array.from(new Set(allEvents
+                    .filter(ev => ev.date)
+                    .map(ev => (ev.date.match(/\d{4}/) || [""])[0])
+                )).filter(y => y).sort((a, b) => b - a); // Sorted descending
+
+                // Populate custom year dropdown
+                const yearList = document.getElementById('custom-year-list');
+                if (yearList) {
+                    yearList.innerHTML = '';
+                    // Add "All Years" option first
+                    const allYearsLi = document.createElement('li');
+                    allYearsLi.textContent = 'All Years';
+                    allYearsLi.setAttribute('data-value', '');
+                    allYearsLi.className = 'custom-dropdown-item';
+                    yearList.appendChild(allYearsLi);
+                    // Add each year
+                    allYears.forEach(y => {
+                        const li = document.createElement('li');
+                        li.textContent = y;
+                        li.setAttribute('data-value', y);
+                        li.className = 'custom-dropdown-item';
+                        yearList.appendChild(li);
+                    });
+                }
+
+                // Determine initial year to display
+                const initialYear = allYears.length > 0 ? allYears[0] : ""; // Most recent year or ""
+                selectedYear = initialYear;
+
+                // Update dropdown display
+                const selected = document.getElementById('custom-year-selected');
+                if (selected) {
+                    const displayText = initialYear ? initialYear : 'All Years';
+                    selected.textContent = displayText;
                     selected.innerHTML += ' <span class="custom-dropdown-arrow">&#9662;</span>';
-                    selectedDate = value;
-                    list.style.display = 'none';
-                    dropdown.classList.remove('open');
-                    renderEvents(selectedYear, selectedDate);
                 }
-            });
 
-            // Close dropdown on outside click
-            document.addEventListener('click', function(e) {
-                if (!dropdown.contains(e.target)) {
-                    list.style.display = 'none';
-                    dropdown.classList.remove('open');
-                }
-            });
+                // Initial render
+                renderEvents(initialYear);
+
+            } catch (e) {
+                console.error("Error loading events:", e);
+                if(timeline) timeline.innerHTML = '<p style="color:#c00;text-align:center;">Could not load events.</p>';
+            } finally {
+                if (loader) loader.classList.remove('active');
+            }
+
+            // Setup dropdown now that it's populated
+            setupCustomYearDropdown();
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            renderEvents();
-            setupCustomYearDropdown();
-            setupCustomDateDropdown();
-        });
+        document.addEventListener('DOMContentLoaded', initializeEvents);
     </script>
 </body>
 </html>
